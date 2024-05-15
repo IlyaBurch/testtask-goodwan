@@ -3,11 +3,11 @@
     <form>
       <label>
         Имя:
-        <input type='text' placeholder='Имя' v-model="name"/>
+        <input type='text' placeholder='Имя' required v-model="name"/>
       </label>
       <label>
         Возраст
-        <input type='text' placeholder='Возраст' v-model="age"/>
+        <input type='text' placeholder='Возраст'  v-model="age"/>
       </label>
       <input type='button' value='cancel' @click='cancel()'/>
       <input type='submit' value='save' @click='save()' />
@@ -18,26 +18,27 @@
 
 <script setup lang="ts">
 import {useUsersStore} from '@/stores/users';
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 const store = useUsersStore();
 
 const name = defineModel('name');
-const age = defineModel('age');
-const pattern = ref(false);
+const age = defineModel ('age');
 
 watch(
   () => store.currentEdit,
   (newValue) => {
     if (newValue) {
       name.value = newValue.name;
-      age.value = newValue.age;
+      age.value  = newValue.age;
     } else {
       name.value = '';
       age.value = 0;
     }
   }
 );
+
+
 
 function save() {
   event.preventDefault();

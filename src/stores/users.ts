@@ -18,6 +18,11 @@ export const useUsersStore = defineStore('users', () => {
 
   function saveChanges(){
     const index : number = users.value.findIndex(u => u.id === currentEdit.value?.id);
+    if (typeof currentEdit.value?.age !== 'number') {
+      alert('Неверно указан возраст');
+      return;
+    }
+      
     if (index !== -1 && currentEdit.value) {
       users.value[index] = currentEdit.value;
     }
