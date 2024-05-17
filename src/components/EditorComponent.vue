@@ -12,7 +12,6 @@
       <input type="button" value="cancel" @click="cancel()" />
       <input type="submit" value="save" @click.prevent="save(name, age)" />
     </form>
-    {{ store.currentEdit }}
   </div>
 </template>
 
